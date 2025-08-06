@@ -318,16 +318,16 @@ export default function CheckoutPage() {
             Back to Cart
           </Link>
 
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 ">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Secure Checkout</h1>
             <p className="text-gray-600">Complete your purchase safely and securely</p>
           </div>
 
           {/* Progress Steps */}
-          <div className="flex justify-center mb-8">
-            <div className="flex items-center space-x-4">
+          <div className="flex justify-center flex-col lg:flex-row mb-8">
+            <div className="flex items-center space-x-0 lg:space-x-4 flex-col lg:flex-row gap-y-8">
               {steps.map((step, index) => (
-                <div key={step.id} className="flex items-center">
+                <div key={step.id} className="flex items-center flex-col lg:flex-row">
                   <div
                     className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-200 ${
                       currentStep >= step.id
@@ -665,11 +665,11 @@ export default function CheckoutPage() {
                       </Card>
                     )}
 
-                    <div className="flex justify-between">
+                    <div className="flex justify-between flex-col lg:flex-row">
                       <Button type="button" onClick={prevStep} variant="outline">
                         Back
                       </Button>
-                      <Button type="button" onClick={nextStep} className="bg-blue-600 hover:bg-blue-700">
+                      <Button type="button" onClick={nextStep} className="bg-blue-600 hover:bg-blue-700 mt-8 lg:mt-auto">
                         Review Order
                       </Button>
                     </div>
@@ -760,13 +760,13 @@ export default function CheckoutPage() {
                         </div>
                       </div>
 
-                      <div className="flex justify-between">
+                      <div className="flex justify-between flex-col lg:flex-row">
                         <Button type="button" onClick={prevStep} variant="outline">
                           Back
                         </Button>
                         <Button
                           type="submit"
-                          className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white font-bold text-lg px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                          className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white font-bold text-lg px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 mt-8 lg:mt-0"
                           disabled={isProcessing}
                         >
                           {isProcessing ? (
