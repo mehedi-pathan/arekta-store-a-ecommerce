@@ -36,7 +36,7 @@ export function HeroSection() {
                   alt="Arekta.store Logo"
                   width={280}
                   height={93}
-                  className="h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+                  className="h-24 lg:h-32 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
                   priority
                 />
 
@@ -58,7 +58,7 @@ export function HeroSection() {
 
             {/* Main Headline with Enhanced Animation */}
             <div className="mb-8">
-              <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h2 className="text-4xl lg:text-7xl leading-tight font-bold mb-6 lg:line-height[4rem]">
                 <span className="text-gray-900 inline-block animate-fade-in-up">Premium</span>
                 <br />
                 <span

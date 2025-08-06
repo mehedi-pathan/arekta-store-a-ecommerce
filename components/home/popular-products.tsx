@@ -8,10 +8,10 @@ import { ArrowRight } from "lucide-react" // Added import for ArrowRight
 const popularProducts = [
   {
     id: "1",
-    name: "PUBG Mobile 8100 UC",
-    price: 7999,
-    originalPrice: 8500,
-    image: "/pubg-8100-uc.png",
+    name: "PUBG Mobile 985 UC",
+    price: 1299,
+    originalPrice: 1500,
+    image: "/pubg-985-uc.png",
     category: "PUBG",
     rating: 4.9,
     seller: "Arekta Store",
