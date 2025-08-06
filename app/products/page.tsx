@@ -294,7 +294,7 @@ const mockProducts = [
     name: "Clash of Clans Gems",
     price: 1299,
     originalPrice: 1500,
-    image: "/coc-gems.png",
+    image: "/coc-2500-gems.png",
     category: "Gaming",
     rating: 4.4,
     seller: "Arekta Store",

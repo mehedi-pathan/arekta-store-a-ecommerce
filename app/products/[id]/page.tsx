@@ -15,17 +15,17 @@ import { Star, Check, ShoppingCart, ArrowLeft, Share2, Heart, Info, Shield, Cloc
 const products = {
   "1": {
     id: "1",
-    name: "PUBG Mobile 8100 UC",
-    price: 7999,
-    originalPrice: 8500,
-    image: "/pubg-8100-uc.png",
+    name: "PUBG Mobile 300 UC",
+    price: 349,
+    originalPrice: 400,
+    image: "/pubg-300-uc.png",
     category: "PUBG",
     rating: 4.9,
     seller: "Arekta Store",
     badge: "Best Seller",
-    discount: "6% OFF",
+    discount: "12% OFF",
     description:
-      "8100 UC (Unknown Cash) for PUBG Mobile. Can be used to purchase Royale Pass, outfits, gun skins, and more.",
+      "300 UC (Unknown Cash) for PUBG Mobile. Can be used to purchase Royale Pass, outfits, gun skins, and more.",
     features: [
       "Instant delivery (5-15 minutes)",
       "Works on all PUBG Mobile versions",
