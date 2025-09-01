@@ -34,6 +34,7 @@ import { useCart } from "@/contexts/cart-context"
 import { useState, useRef, useEffect } from "react"
 import { CartSidebar } from "@/components/cart/cart-sidebar"
 import { useToast } from "@/hooks/use-toast"
+import { safeGetFromLocalStorage, safeRemoveFromLocalStorage } from "@/utils/localStorage"
 
 interface User {
   id: string
@@ -60,11 +61,9 @@ export function Navbar() {
 
   // Get current user from localStorage
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const userSession = localStorage.getItem("currentUser")
-      if (userSession) {
-        setCurrentUser(JSON.parse(userSession))
-      }
+    const userSession = safeGetFromLocalStorage<User | null>("currentUser", null)
+    if (userSession) {
+      setCurrentUser(userSession)
     }
   }, [])
 
@@ -113,10 +112,9 @@ export function Navbar() {
   }
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("currentUser")
-      document.cookie = "user-session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT"
-      setCurrentUser(null)
+    safeRemoveFromLocalStorage("currentUser")
+    document.cookie = "user-session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT"
+    setCurrentUser(null)
       toast({
         title: "Logged out",
         description: "You have been successfully logged out",

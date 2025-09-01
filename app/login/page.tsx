@@ -12,6 +12,8 @@ import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/hooks/use-toast"
 import { Eye, EyeOff, UserPlus } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import bcrypt from "bcryptjs"
+import { safeGetFromLocalStorage, safeSetToLocalStorage, safeRemoveFromLocalStorage } from "@/utils/localStorage"
 
 interface UserSession {
   id: string
@@ -33,18 +35,12 @@ export default function LoginPage() {
 
   // Get users from localStorage
   const getUsers = (): UserSession[] => {
-    if (typeof window !== "undefined") {
-      const users = localStorage.getItem("users")
-      return users ? JSON.parse(users) : []
-    }
-    return []
+    return safeGetFromLocalStorage<UserSession[]>("users", [])
   }
 
   // Save users to localStorage
   const saveUsers = (users: UserSession[]) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("users", JSON.stringify(users))
-    }
+    safeSetToLocalStorage("users", users)
   }
 
   // Set current user in localStorage and cookies
@@ -58,7 +54,7 @@ export default function LoginPage() {
         avatar: user.avatar,
         lastLogin: new Date().toISOString(),
       }
-      localStorage.setItem("currentUser", JSON.stringify(userSession))
+      safeSetToLocalStorage("currentUser", userSession)
 
       // Set cookie for server-side access
       document.cookie = `user-session=${JSON.stringify(userSession)}; path=/; max-age=86400` // 24 hours
@@ -71,9 +67,9 @@ export default function LoginPage() {
 
     try {
       const users = getUsers()
-      const user = users.find((u) => u.email === loginData.email && u.password === loginData.password)
+      const user = users.find((u) => u.email === loginData.email)
 
-      if (user) {
+      if (user && await bcrypt.compare(loginData.password, user.password)) {
         // Update last login
         const updatedUsers = users.map((u) => (u.id === user.id ? { ...u, lastLogin: new Date().toISOString() } : u))
         saveUsers(updatedUsers)
@@ -148,12 +144,13 @@ export default function LoginPage() {
         return
       }
 
-      // Create new user
+      // Create new user with hashed password
+      const hashedPassword = await bcrypt.hash(registerData.password, 12)
       const newUser: UserSession = {
         id: Date.now().toString(),
         name: registerData.name,
         email: registerData.email,
-        password: registerData.password,
+        password: hashedPassword,
         role: registerData.email === "admin@arekta.store" ? "super_admin" : "user",
         createdAt: new Date().toISOString(),
         lastLogin: new Date().toISOString(),

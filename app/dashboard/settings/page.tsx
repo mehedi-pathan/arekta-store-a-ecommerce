@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
+import bcrypt from "bcryptjs"
 import { Mail, Lock, Save, Camera, Shield } from "lucide-react"
 import Image from "next/image"
 
@@ -118,8 +119,9 @@ export default function SettingsPage() {
         const users = JSON.parse(localStorage.getItem("users") || "[]")
         const userIndex = users.findIndex((user: UserInterface) => user.id === currentUser?.id)
 
-        if (userIndex !== -1 && users[userIndex].password === formData.currentPassword) {
-          users[userIndex].password = formData.newPassword
+        if (userIndex !== -1 && await bcrypt.compare(formData.currentPassword, users[userIndex].password)) {
+          const hashedNewPassword = await bcrypt.hash(formData.newPassword, 12)
+          users[userIndex].password = hashedNewPassword
           localStorage.setItem("users", JSON.stringify(users))
 
           setFormData({
