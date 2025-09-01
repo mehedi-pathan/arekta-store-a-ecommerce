@@ -33,6 +33,7 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { safeGetFromLocalStorage, safeSetToLocalStorage } from "@/utils/localStorage"
 
 const paymentMethods = [
   {
@@ -193,9 +194,9 @@ export default function CheckoutPage() {
     }
 
     // Save to localStorage
-    const existingOrders = JSON.parse(localStorage.getItem("sobgamecoin_orders") || "[]")
+    const existingOrders = safeGetFromLocalStorage("sobgamecoin_orders", [])
     existingOrders.push(orderData)
-    localStorage.setItem("sobgamecoin_orders", JSON.stringify(existingOrders))
+    safeSetToLocalStorage("sobgamecoin_orders", existingOrders)
 
     // Simulate order processing
     setTimeout(() => {
