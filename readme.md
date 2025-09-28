@@ -6,6 +6,8 @@ Arekta Store is a modern, full-stack digital marketplace built with Next.js 15, 
 
 ## Features
 
+![arekta store- gaming coin buy sell](landing-image.png)
+
 - **Product Catalog**: PUBG UC, iTunes Gift Cards, iCloud Storage, Free Fire Diamonds, and more.
 - **Category Browsing**: Filter and browse by categories like PUBG, iTunes, iCloud, Gaming, etc.
 - **Product Search**: Fast, client-side product search and filtering.
